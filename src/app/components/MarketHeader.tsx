@@ -1,6 +1,9 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+
 const MarketHeader = () => {
   return (
-    <div className="bg-black text-white text-sm py-2 px-4 flex justify-between items-center">
+    <div className="bg-black text-white text-sm py-2 px-32 flex justify-between items-center">
       <div>
         Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%
         <a href="#" className="underline ml-2">
@@ -9,7 +12,7 @@ const MarketHeader = () => {
       </div>
       <div className="flex items-center">
         <span>English</span>
-        <i className="fas fa-chevron-down ml-1"></i>
+        <FontAwesomeIcon icon={faChevronDown} className="ml-1" />
       </div>
     </div>
   );
