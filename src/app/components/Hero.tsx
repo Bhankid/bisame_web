@@ -1,12 +1,11 @@
 "use client";
-
 import Image from "next/image";
 import { useState, useEffect } from "react";
 
 const images = [
-  { src: "/Frame 560.png", alt: "iPhone 14 Series with a 10% off voucher" },
-  { src: "/Frame 560.png", alt: "Laptop with a 15% off voucher" },
-  { src: "/Frame 560.png", alt: "Smartwatch with a 20% off voucher" },
+  { src: "/Frame 560.png", alt: "" },
+  { src: "/Frame 600.png", alt: "" },
+  { src: "/Frame 560.png", alt: "" },
 ];
 
 const Hero = () => {
@@ -47,38 +46,43 @@ const Hero = () => {
 
       {/* Carousel Section */}
       <div className="w-full md:w-3/4 p-2 relative overflow-hidden">
-        <div className="relative w-full h-[400px]">
-          {/* Images */}
-          {images.map((img, index) => (
-            <div
-              key={index}
-              className={`absolute inset-0 transition-opacity duration-1000 ${
-                index === activeIndex ? "opacity-100" : "opacity-0"
-              }`}
-            >
-              <Image
-                src={img.src}
-                alt={img.alt}
-                fill
-                priority
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 75vw"
-              />
-            </div>
-          ))}
-        </div>
+        <div className="carousel-container relative w-full h-[400px]">
+          {/* Carousel Images */}
+          <div
+            className="carousel-images flex transition-transform duration-1000 ease-in-out"
+            style={{
+              transform: `translateX(-${(activeIndex * 100) / images.length}%)`,
+            }}
+          >
+            {images.map((img, index) => (
+              <div
+                key={index}
+                className="carousel-item w-1/3 h-full flex-shrink-0"
+              >
+                <Image
+                  src={img.src}
+                  alt={img.alt}
+                  fill
+                  priority
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 75vw"
+                />
+              </div>
+            ))}
+          </div>
 
-        {/* Carousel Indicators */}
-        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
-          {images.map((_, index) => (
-            <span
-              key={index}
-              className={`w-3 h-3 rounded-full cursor-pointer ${
-                index === activeIndex ? "bg-gray-700" : "bg-gray-300"
-              }`}
-              onClick={() => setActiveIndex(index)}
-            ></span>
-          ))}
+          {/* Carousel Indicators */}
+          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
+            {images.map((_, index) => (
+              <span
+                key={index}
+                className={`w-3 h-3 rounded-full cursor-pointer ${
+                  index === activeIndex ? "bg-red-500" : "bg-red-400"
+                }`}
+                onClick={() => setActiveIndex(index)}
+              ></span>
+            ))}
+          </div>
         </div>
       </div>
     </div>

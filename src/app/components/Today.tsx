@@ -67,7 +67,7 @@ const products: ProductCard[] = [
 
 const Today: FC = () => {
   return (
-    <div className="p-4">
+    <div className="p-4 mt-20">
       <div className="flex items-center mb-4">
         <div className="w-2 h-8 bg-red-500 mr-2"></div>
         <h2 className="text-lg font-bold">Today&apos;s</h2>

@@ -1,7 +1,7 @@
 const Category = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-white p-4">
-      <div className="w-full max-w-4xl">
+    <div className="flex flex-col items-center justify-center bg-white p-4">
+      <div className="w-full max-w-5xl">
         <div className="flex items-center mb-4">
           <div className="w-2 h-8 bg-red-500 mr-2"></div>
           <span className="text-red-500 font-semibold">Categories</span>
