@@ -2,8 +2,8 @@ import Image from 'next/image';
 
 const Card = () => {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-black text-white p-8 rounded-lg flex flex-col md:flex-row items-center">
+    <div className="flex items-center justify-center min-h-80 bg-gray-100">
+      <div className="bg-black text-white p-4 rounded-lg flex flex-col md:flex-row items-center">
         <div className="md:w-1/2">
           <p className="text-green-500 mb-2">Categories</p>
           <h1 className="text-4xl font-bold mb-4">

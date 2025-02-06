@@ -1,6 +1,19 @@
 import Image from "next/image";
 
-const products = [
+// Define the Product type
+type Product = {
+  id: number;
+  name: string;
+  price: string;
+  rating: number;
+  reviews: number;
+  image: string;
+  isNew: boolean;
+  isInCart: boolean;
+};
+
+// Sample product data
+const products: Product[] = [
   {
     id: 1,
     name: "Breed Dry Dog Food",
@@ -77,13 +90,19 @@ const products = [
     price: "$560",
     rating: 4.5,
     reviews: 55,
-    image: "/698717_Z8A1X_3475_001_100_0000_Light-Reversible-quilted-satin-jacket 1.png",
+    image:
+      "/698717_Z8A1X_3475_001_100_0000_Light-Reversible-quilted-satin-jacket 1.png",
     isNew: false,
     isInCart: false,
   },
 ];
 
-const ProductCard = ({ product }) => (
+// Define the props for the ProductCard component
+interface ProductCardProps {
+  product: Product;
+}
+
+const ProductCard = ({ product }: ProductCardProps) => (
   <div className="border rounded-lg p-4 relative">
     {product.isNew && (
       <span className="absolute top-2 left-2 bg-green-500 text-white text-xs px-2 py-1 rounded">

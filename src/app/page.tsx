@@ -4,6 +4,7 @@ import Category from "./components/Category";
 import Month from "./components/Month";
 import OurProducts from "./components/OurProducts";
 import Card from "./components/Card";
+import Featured from "./components/Featured";
 
 export default function Home() {
   return (

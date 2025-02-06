@@ -7,34 +7,36 @@
     width: 100%;
     height: 100%;
     overflow: hidden;
+    position: relative;
 }
 
+/* Wrapping images in a flex container */
 .carousel-images {
     display: flex;
     width: 300%;
-    /* 3 images, each taking 100% width */
-    animation: slide-left 10s infinite;
-    /* Adjust timing as needed */
-}
-
-.carousel-item {
-    width: 100%;
-    /* Each image takes up 100% of the container width */
     height: 100%;
+    animation: slide-left 10s infinite ease-in-out;
 }
 
-/* Keyframes for Sliding Animation */
+/* Each item should take up 1/3 of the total width */
+.carousel-item {
+    width: 33.33%;
+    height: 100%;
+    flex-shrink: 0;
+}
+
+/* Keyframes for Smooth Sliding Animation */
 @keyframes slide-left {
     0% {
         transform: translateX(0%);
     }
 
     33% {
-        transform: translateX(-100%);
+        transform: translateX(-33.33%);
     }
 
     66% {
-        transform: translateX(-200%);
+        transform: translateX(-66.66%);
     }
 
     100% {
