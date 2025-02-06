@@ -3,8 +3,6 @@ import { FC } from "react";
 
 interface FeaturedItem {
   id: number;
-  title: string;
-  description: string;
   image: string;
   alt: string;
 }
@@ -12,44 +10,30 @@ interface FeaturedItem {
 const featuredItems: FeaturedItem[] = [
   {
     id: 1,
-    title: "PlayStation 5",
-    description: "Black and White version of the PS5 coming out on sale.",
     image: "/ps5-slim-goedkope-playstation_large 1.png",
-    alt: "",
+    alt: "PlayStation 5",
   },
   {
     id: 2,
-    title: "Women's Collections",
-    description: "Featured woman collections that give you another vibe.",
     image: "/attractive-woman-wearing-hat-posing-black-background 1.png",
-    alt: "",
+    alt: "Women's Collections",
   },
   {
     id: 3,
-    title: "Speakers",
-    description: "Amazon wireless speakers",
     image: "/Frame 686.png",
-    alt: "",
+    alt: "Speakers",
   },
   {
     id: 4,
-    title: "Perfume",
-    description: "GUCCI INTENSE OUD EDP",
     image: "/652e82cd70aa6522dd785109a455904c.png",
-    alt: "",
+    alt: "Perfume",
   },
 ];
 
 const Featured: FC = () => {
   return (
     <div className="p-8">
-      <div className="flex items-center mb-4">
-        <div className="w-2 h-8 bg-red-500 mr-2"></div>
-        <span className="text-red-500 font-bold">Featured</span>
-      </div>
-      <h1 className="text-4xl font-bold mb-8">New Arrival</h1>
-      <div className="flex flex-col md:flex-row gap-4 h-[800px]">
-        {/* First item taking half width */}
+      <div className="flex flex-col md:flex-row gap-4 h-[400px]">
         <div className="md:w-1/2 h-full">
           <div className="relative h-full">
             <Image
@@ -59,19 +43,10 @@ const Featured: FC = () => {
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 50vw"
             />
-            <div className="absolute bottom-4 left-4 text-white z-10">
-              <h2 className="text-xl font-bold">{featuredItems[0].title}</h2>
-              <p>{featuredItems[0].description}</p>
-              <button className="mt-2 px-4 py-2 bg-black text-white hover:bg-gray-800 transition-colors">
-                Shop Now
-              </button>
-            </div>
           </div>
         </div>
 
-        {/* Right side container */}
         <div className="md:w-1/2 flex flex-col gap-4 h-full">
-          {/* Women's collection spanning full width */}
           <div className="relative h-1/2">
             <Image
               src={featuredItems[1].image}
@@ -80,16 +55,8 @@ const Featured: FC = () => {
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 50vw"
             />
-            <div className="absolute bottom-4 left-4 text-white z-10">
-              <h2 className="text-xl font-bold">{featuredItems[1].title}</h2>
-              <p>{featuredItems[1].description}</p>
-              <button className="mt-2 px-4 py-2 bg-black text-white hover:bg-gray-800 transition-colors">
-                Shop Now
-              </button>
-            </div>
           </div>
 
-          {/* Bottom two items in a row */}
           <div className="flex gap-4 h-1/2">
             {featuredItems.slice(2).map((item) => (
               <div key={item.id} className="relative w-1/2 h-full">
@@ -100,13 +67,6 @@ const Featured: FC = () => {
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, 25vw"
                 />
-                <div className="absolute bottom-4 left-4 text-white z-10">
-                  <h2 className="text-xl font-bold">{item.title}</h2>
-                  <p>{item.description}</p>
-                  <button className="mt-2 px-4 py-2 bg-black text-white hover:bg-gray-800 transition-colors">
-                    Shop Now
-                  </button>
-                </div>
               </div>
             ))}
           </div>

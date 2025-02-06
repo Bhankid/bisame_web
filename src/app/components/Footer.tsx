@@ -1,6 +1,8 @@
 import Image from "next/image";
 
 function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer className="py-10 px-5 md:px-20 bg-black text-white">
       <div className="grid grid-cols-1 md:grid-cols-5 gap-10">
@@ -73,7 +75,7 @@ function Footer() {
         </div>
       </div>
       <div className="text-center mt-10">
-        <p>&copy; Copyright Rimel 2022. All right reserved</p>
+        <p>&copy; Copyright Rimel {currentYear}. All right reserved</p>
       </div>
     </footer>
   );
