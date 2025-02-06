@@ -1,5 +1,7 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Image from "next/image";
-import { FC } from "react";
 
 interface ProductCard {
   id: number;
@@ -53,19 +55,37 @@ const products: ProductCard[] = [
     rating: 4.5,
     reviews: 99,
   },
-  {
-    id: 5,
-    discount: 25,
-    image: "/sam-moghadam-khamseh-kvmdsTrGOBM-unsplash 1.png",
-    title: "S-Series Comfort Chair",
-    price: 375,
-    originalPrice: 490,
-    rating: 4.5,
-    reviews: 99,
-  },
 ];
 
-const Today: FC = () => {
+// Set sale ending date
+const SALE_END_TIME = new Date();
+SALE_END_TIME.setDate(SALE_END_TIME.getDate() + 3); // 3 days from now
+
+const Today = () => {
+  const [timeLeft, setTimeLeft] = useState(() => calculateTimeLeft());
+
+  function calculateTimeLeft() {
+    const now = new Date();
+    const difference = SALE_END_TIME.getTime() - now.getTime();
+
+    if (difference <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+
+    return {
+      days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+      hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+      minutes: Math.floor((difference / (1000 * 60)) % 60),
+      seconds: Math.floor((difference / 1000) % 60),
+    };
+  }
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTimeLeft(calculateTimeLeft());
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="p-4 mt-20">
       <div className="flex items-center mb-4">
@@ -74,44 +94,24 @@ const Today: FC = () => {
       </div>
       <h1 className="text-4xl font-bold mb-4">Flash Sales</h1>
 
-      <div className="flex items-center mb-8">
-        <div className="text-center mr-4">
-          <div className="text-2xl font-bold">03</div>
-          <div className="text-sm">Days</div>
-        </div>
-        <div className="text-center mr-4">
-          <div className="text-2xl font-bold">23</div>
-          <div className="text-sm">Hours</div>
-        </div>
-        <div className="text-center mr-4">
-          <div className="text-2xl font-bold">19</div>
-          <div className="text-sm">Minutes</div>
-        </div>
-        <div className="text-center">
-          <div className="text-2xl font-bold text-red-500">56</div>
-          <div className="text-sm">Seconds</div>
-        </div>
+      {/* Countdown Timer */}
+      <div className="flex items-center mb-8 text-center">
+        {Object.entries(timeLeft).map(([unit, value]) => (
+          <div key={unit} className="mr-4">
+            <div className="text-2xl font-bold">
+              {String(value).padStart(2, "0")}
+            </div>
+            <div className="text-sm capitalize">{unit}</div>
+          </div>
+        ))}
       </div>
 
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center">
-          <button className="p-2 bg-gray-200 rounded-full mr-2">
-            <i className="fas fa-chevron-left"></i>
-          </button>
-          <button className="p-2 bg-gray-200 rounded-full">
-            <i className="fas fa-chevron-right"></i>
-          </button>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+      {/* Product List */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {products.map((product) => (
           <div key={product.id} className="border p-4 rounded-lg relative">
-            <div className="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded">
+            <div className="absolute top-2 left-2 bg-red-500 z-50 text-white text-xs px-2 py-1 rounded">
               -{product.discount}%
-            </div>
-            <div className="absolute top-2 right-2">
-              <i className="far fa-heart"></i>
             </div>
             <div className="relative w-full h-[200px] mb-4">
               <Image
@@ -119,7 +119,6 @@ const Today: FC = () => {
                 alt={product.title}
                 fill
                 className="object-cover"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
             </div>
             <h3 className="text-lg font-bold mb-2">{product.title}</h3>
@@ -131,11 +130,16 @@ const Today: FC = () => {
             </div>
             <div className="flex items-center">
               <div className="text-yellow-500 mr-2">
-                <i className="fas fa-star"></i>
-                <i className="fas fa-star"></i>
-                <i className="fas fa-star"></i>
-                <i className="fas fa-star"></i>
-                <i className="fas fa-star-half-alt"></i>
+                {Array.from({ length: 5 }, (_, i) => (
+                  <i
+                    key={i}
+                    className={`fas fa-star ${
+                      i < Math.floor(product.rating)
+                        ? "text-yellow-500"
+                        : "text-gray-300"
+                    }`}
+                  ></i>
+                ))}
               </div>
               <div className="text-gray-500">({product.reviews})</div>
             </div>
