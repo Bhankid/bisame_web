@@ -1,4 +1,10 @@
 import Image from "next/image";
+import {
+  Square2StackIcon as FacebookIcon,
+  ChatBubbleOvalLeftIcon as TwitterIcon,
+  PhotoIcon as InstagramIcon,
+  LinkIcon as LinkedInIcon,
+} from "@heroicons/react/24/outline";
 
 function Footer() {
   const currentYear = new Date().getFullYear();
@@ -28,18 +34,64 @@ function Footer() {
         </div>
         <div>
           <h2 className="text-xl font-bold mb-4">Account</h2>
-          <p>My Account</p>
-          <p>Login / Register</p>
-          <p>Cart</p>
-          <p>Wishlist</p>
-          <p>Shop</p>
+          <ul>
+            <li>
+              <a href="/my-account" className="text-white hover:text-gray-400">
+                My Account
+              </a>
+            </li>
+            <li>
+              <a href="/login" className="text-white hover:text-gray-400">
+                Login / Register
+              </a>
+            </li>
+            <li>
+              <a href="/cart" className="text-white hover:text-gray-400">
+                Cart
+              </a>
+            </li>
+            <li>
+              <a href="/wishlist" className="text-white hover:text-gray-400">
+                Wishlist
+              </a>
+            </li>
+            <li>
+              <a href="/shop" className="text-white hover:text-gray-400">
+                Shop
+              </a>
+            </li>
+          </ul>
         </div>
         <div>
           <h2 className="text-xl font-bold mb-4">Quick Link</h2>
-          <p>Privacy Policy</p>
-          <p>Terms Of Use</p>
-          <p>FAQ</p>
-          <p>Contact</p>
+          <ul>
+            <li>
+              <a
+                href="/privacy-policy"
+                className="text-white hover:text-gray-400"
+              >
+                Privacy Policy
+              </a>
+            </li>
+            <li>
+              <a
+                href="/terms-of-use"
+                className="text-white hover:text-gray-400"
+              >
+                Terms Of Use
+              </a>
+            </li>
+            <li>
+              <a href="/faq" className="text-white hover:text-gray-400">
+                FAQ
+              </a>
+            </li>
+            <li>
+              <a href="/contact" className="text-white hover:text-gray-400">
+                Contact
+              </a>
+            </li>
+          </ul>
         </div>
         <div>
           <h2 className="text-xl font-bold mb-4">Download App</h2>
@@ -60,16 +112,16 @@ function Footer() {
           </div>
           <div className="flex space-x-4 mt-4">
             <a href="#" aria-label="Facebook">
-              ƒ
+              <FacebookIcon className="w-6 h-6 text-white" />
             </a>
             <a href="#" aria-label="Twitter">
-              †
+              <TwitterIcon className="w-6 h-6 text-white" />
             </a>
             <a href="#" aria-label="Instagram">
-              ℹ
+              <InstagramIcon className="w-6 h-6 text-white" />
             </a>
             <a href="#" aria-label="LinkedIn">
-              ℓ
+              <LinkedInIcon className="w-6 h-6 text-white" />
             </a>
           </div>
         </div>
