@@ -35,7 +35,7 @@ const Featured: FC = () => {
     <div className="p-8">
       <div className="flex flex-col md:flex-row gap-4 h-[400px]">
         <div className="md:w-1/2 h-full">
-          <div className="relative h-full">
+          <div className="relative h-full hover:scale-105 transition duration-300">
             <Image
               src={featuredItems[0].image}
               alt={featuredItems[0].alt}
@@ -47,7 +47,7 @@ const Featured: FC = () => {
         </div>
 
         <div className="md:w-1/2 flex flex-col gap-4 h-full">
-          <div className="relative h-1/2">
+          <div className="relative h-1/2 hover:scale-105 transition duration-300">
             <Image
               src={featuredItems[1].image}
               alt={featuredItems[1].alt}
@@ -59,7 +59,10 @@ const Featured: FC = () => {
 
           <div className="flex gap-4 h-1/2">
             {featuredItems.slice(2).map((item) => (
-              <div key={item.id} className="relative w-1/2 h-full">
+              <div
+                key={item.id}
+                className="relative w-1/2 h-full hover:scale-105 transition duration-300"
+              >
                 <Image
                   src={item.image}
                   alt={item.alt}
