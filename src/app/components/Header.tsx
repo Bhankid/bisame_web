@@ -1,3 +1,9 @@
+import {
+  MagnifyingGlassIcon,
+  HeartIcon,
+  ShoppingCartIcon,
+} from "@heroicons/react/24/outline";
+
 function Header() {
   return (
     <div className="border-b border-gray-200">
@@ -24,10 +30,10 @@ function Header() {
               placeholder="What are you looking for?"
               className="border border-gray-300 rounded-full py-1 px-4 w-64"
             />
-            <i className="fas fa-search absolute right-3 top-2 text-gray-500"></i>
+            <MagnifyingGlassIcon className="absolute right-3 top-2 text-gray-500 w-4 h-4" />
           </div>
-          <i className="far fa-heart text-xl text-gray-800 hover:text-black"></i>
-          <i className="fas fa-shopping-cart text-xl text-gray-800 hover:text-black"></i>
+          <HeartIcon className="text-xl text-gray-800 hover:text-black" />
+          <ShoppingCartIcon className="text-xl text-gray-800 hover:text-black" />
         </div>
       </div>
     </div>

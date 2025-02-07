@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { ChevronRightIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
 
 const images = [
   { src: "/Frame 560.png", alt: "" },
@@ -10,37 +11,82 @@ const images = [
 
 const Hero = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [expandedCategory, setExpandedCategory] = useState<number | null>(null); 
 
   // Automatically change slides every 5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveIndex((prevIndex) => (prevIndex + 1) % images.length);
     }, 5000);
-
     return () => clearInterval(interval);
   }, []);
+
+  const categories = [
+    {
+      name: "Woman's Fashion",
+      subcategories: ["Dresses", "Tops", "Jeans", "Shoes"],
+    },
+    {
+      name: "Men's Fashion",
+      subcategories: ["Shirts", "Pants", "Jackets", "Accessories"],
+    },
+    "Electronics",
+    "Home & Lifestyle",
+    "Medicine",
+    "Sports & Outdoor",
+    "Baby's & Toys",
+    "Groceries & Pets",
+    "Health & Beauty",
+  ];
 
   return (
     <div className="flex flex-col md:flex-row">
       {/* Sidebar Menu */}
       <div className="w-full md:w-1/4 p-4 border-r">
         <ul className="space-y-4">
-          {[
-            "Woman's Fashion",
-            "Men's Fashion",
-            "Electronics",
-            "Home & Lifestyle",
-            "Medicine",
-            "Sports & Outdoor",
-            "Baby's & Toys",
-            "Groceries & Pets",
-            "Health & Beauty",
-          ].map((category) => (
-            <li key={category} className="flex justify-between items-center">
-              <span>{category}</span>
-              <i className="fas fa-chevron-right"></i>
-            </li>
-          ))}
+          {categories.map((category, index) =>
+            typeof category === "string" ? (
+              <li key={index} className="flex justify-between items-center">
+                <span>{category}</span>
+                <i className="fas fa-chevron-right"></i>
+              </li>
+            ) : (
+              <>
+                {/* Main Category */}
+                <li
+                  key={index}
+                  className="flex justify-between items-center cursor-pointer"
+                  onClick={() =>
+                    setExpandedCategory(
+                      expandedCategory === index ? null : index // Toggle between null and index
+                    )
+                  }
+                >
+                  <span>{category.name}</span>
+                  {expandedCategory === index ? (
+                    <ChevronDownIcon className="w-5 h-5 text-gray-500" />
+                  ) : (
+                    <ChevronRightIcon className="w-5 h-5 text-gray-500" />
+                  )}
+                </li>
+
+                {/* Subcategories */}
+                <div
+                  className={`ml-4 transition-height overflow-hidden ${
+                    expandedCategory === index ? "max-h-[100px]" : "max-h-0"
+                  }`}
+                >
+                  <ul className="space-y-2">
+                    {category.subcategories.map((subcategory, subIndex) => (
+                      <li key={subIndex} className="pl-4">
+                        {subcategory}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </>
+            )
+          )}
         </ul>
       </div>
 
