@@ -61,7 +61,7 @@ const allProducts: ProductCard[] = [
   {
     id: 5,
     discount: 20,
-    image: "/product5.png",
+    image: "/ps5-slim-goedkope-playstation_large 1.png",
     title: "Wireless Mouse",
     price: 45,
     originalPrice: 60,
@@ -71,7 +71,7 @@ const allProducts: ProductCard[] = [
   {
     id: 6,
     discount: 15,
-    image: "/product6.png",
+    image: "/gammaxx-l240-argb-1-500x500 1.png",
     title: "Bluetooth Speaker",
     price: 80,
     originalPrice: 100,
