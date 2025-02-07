@@ -8,8 +8,20 @@ import {
   PlayIcon,
 } from "@heroicons/react/24/outline";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
+import { useState } from "react"; 
 
 const Category = () => {
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+
+  const categories = [
+    { name: "Phones", icon: PhoneIcon },
+    { name: "Computers", icon: ComputerDesktopIcon },
+    { name: "SmartWatch", icon: ClockIcon },
+    { name: "Camera", icon: CameraIcon },
+    { name: "Headphones", icon: SpeakerWaveIcon },
+    { name: "Gaming", icon: PlayIcon },
+  ];
+
   return (
     <div className="flex flex-col items-center justify-center bg-white p-4">
       <div className="w-full max-w-5xl">
@@ -22,51 +34,53 @@ const Category = () => {
 
         {/* Categories Grid */}
         <div className="flex justify-between items-center mb-6">
+          {/* Category Items */}
           <div className="flex space-x-4">
-            {/* Phones */}
-            <div className="flex flex-col items-center justify-center w-24 h-24 border border-gray-300 rounded-md">
-              <PhoneIcon className="w-6 h-6 text-gray-600 mb-2" />
-              <span>Phones</span>
-            </div>
+            {categories.map((category) => {
+              const Icon = category.icon;
 
-            {/* Computers */}
-            <div className="flex flex-col items-center justify-center w-24 h-24 border border-gray-300 rounded-md">
-              <ComputerDesktopIcon className="w-6 h-6 text-gray-600 mb-2" />
-              <span>Computers</span>
-            </div>
-
-            {/* SmartWatch */}
-            <div className="flex flex-col items-center justify-center w-24 h-24 border border-gray-300 rounded-md">
-              <ClockIcon className="w-6 h-6 text-gray-600 mb-2" />
-              <span>SmartWatch</span>
-            </div>
-
-            {/* Camera */}
-            <div className="flex flex-col items-center justify-center w-24 h-24 bg-red-500 text-white rounded-md">
-              <CameraIcon className="w-6 h-6 text-white mb-2" />
-              <span>Camera</span>
-            </div>
-
-            {/* Headphones */}
-            <div className="flex flex-col items-center justify-center w-24 h-24 border border-gray-300 rounded-md">
-              <SpeakerWaveIcon className="w-6 h-6 text-gray-600 mb-2" />
-              <span>Headphones</span>
-            </div>
-
-            {/* Gaming */}
-            <div className="flex flex-col items-center justify-center w-24 h-24 border border-gray-300 rounded-md">
-              <PlayIcon className="w-6 h-6 text-gray-600 mb-2" />
-              <span>Gaming</span>
-            </div>
+              return (
+                <div
+                  key={category.name}
+                  onMouseEnter={() => setActiveCategory(category.name)}
+                  onMouseLeave={() => setActiveCategory(null)}
+                  className={`group flex flex-col items-center justify-center w-24 h-24 rounded-md transition-all duration-300 ${
+                    activeCategory === category.name ||
+                    category.name === "Camera"
+                      ? "bg-red-500 text-white border-red-500"
+                      : "border border-gray-300 text-gray-600 hover:bg-red-500 hover:border-red-500 hover:text-white hover:scale-105"
+                  }`}
+                >
+                  <Icon
+                    className={`w-6 h-6 mb-2 ${
+                      activeCategory === category.name ||
+                      category.name === "Camera"
+                        ? "text-white"
+                        : "text-gray-600 group-hover:text-white"
+                    }`}
+                  />
+                  <span
+                    className={`${
+                      activeCategory === category.name ||
+                      category.name === "Camera"
+                        ? "text-white"
+                        : "text-gray-600 group-hover:text-white"
+                    }`}
+                  >
+                    {category.name}
+                  </span>
+                </div>
+              );
+            })}
           </div>
 
           {/* Navigation Buttons */}
           <div className="flex space-x-2">
-            <button className="w-8 h-8 flex items-center justify-center border border-gray-300 rounded-full">
-              <ChevronLeftIcon className="w-4 h-4 text-gray-600" />
+            <button className="w-8 h-8 flex items-center justify-center border border-gray-300 rounded-full transition-all duration-300 hover:bg-red-500 hover:text-white hover:border-red-500">
+              <ChevronLeftIcon className="w-4 h-4 text-gray-600 group-hover:text-white" />
             </button>
-            <button className="w-8 h-8 flex items-center justify-center border border-gray-300 rounded-full">
-              <ChevronRightIcon className="w-4 h-4 text-gray-600" />
+            <button className="w-8 h-8 flex items-center justify-center border border-gray-300 rounded-full transition-all duration-300 hover:bg-red-500 hover:text-white hover:border-red-500">
+              <ChevronRightIcon className="w-4 h-4 text-gray-600 group-hover:text-white" />
             </button>
           </div>
         </div>

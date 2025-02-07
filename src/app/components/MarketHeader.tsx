@@ -20,7 +20,7 @@ const MarketHeader = () => {
       const currentIndex = saleTexts.indexOf(saleText);
       const nextIndex = (currentIndex + 1) % saleTexts.length;
       setSaleText(saleTexts[nextIndex]);
-    }, 5000);
+    }, 4000);
 
     return () => clearInterval(intervalId);
   }, [saleText]);

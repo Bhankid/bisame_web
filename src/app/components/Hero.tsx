@@ -51,10 +51,9 @@ const Hero = () => {
                 <i className="fas fa-chevron-right"></i>
               </li>
             ) : (
-              <>
+              <div key={index}>
                 {/* Main Category */}
                 <li
-                  key={index}
                   className="flex justify-between items-center cursor-pointer"
                   onClick={() =>
                     setExpandedCategory(
@@ -72,20 +71,19 @@ const Hero = () => {
 
                 {/* Subcategories */}
                 <div
-                  key={`${index}-subcategories`}
                   className={`ml-4 transition-height overflow-hidden ${
                     expandedCategory === index ? "max-h-[100px]" : "max-h-0"
                   }`}
                 >
                   <ul className="space-y-2">
                     {category.subcategories.map((subcategory, subIndex) => (
-                      <li key={subIndex} className="pl-4">
+                      <li key={`${index}-${subIndex}`} className="pl-4">
                         {subcategory}
                       </li>
                     ))}
                   </ul>
                 </div>
-              </>
+              </div>
             )
           )}
         </ul>
@@ -109,8 +107,8 @@ const Hero = () => {
                 <Image
                   src={img.src}
                   alt={img.alt}
-                  layout="fill" // Use layout="fill" instead of fill
-                  objectFit="cover" // Ensure the image covers the container without distortion
+                  layout="fill"
+                  objectFit="cover"
                   className="object-cover"
                 />
               </div>
