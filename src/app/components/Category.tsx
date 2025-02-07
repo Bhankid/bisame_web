@@ -8,7 +8,7 @@ import {
   PlayIcon,
 } from "@heroicons/react/24/outline";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
-import { useState } from "react"; 
+import { useState } from "react";
 
 const Category = () => {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
@@ -38,31 +38,29 @@ const Category = () => {
           <div className="flex space-x-4">
             {categories.map((category) => {
               const Icon = category.icon;
+              const isActive = activeCategory === category.name;
 
               return (
                 <div
                   key={category.name}
                   onMouseEnter={() => setActiveCategory(category.name)}
                   onMouseLeave={() => setActiveCategory(null)}
-                  className={`group flex flex-col items-center justify-center w-24 h-24 rounded-md transition-all duration-300 ${
-                    activeCategory === category.name ||
-                    category.name === "Camera"
+                  className={`group flex flex-col items-center justify-center w-24 h-24 rounded-md transition-all duration-300 border ${
+                    isActive
                       ? "bg-red-500 text-white border-red-500"
-                      : "border border-gray-300 text-gray-600 hover:bg-red-500 hover:border-red-500 hover:text-white hover:scale-105"
+                      : "border-gray-300 text-gray-600 hover:bg-red-500 hover:border-red-500 hover:text-white hover:scale-105"
                   }`}
                 >
                   <Icon
-                    className={`w-6 h-6 mb-2 ${
-                      activeCategory === category.name ||
-                      category.name === "Camera"
+                    className={`w-6 h-6 mb-2 transition-all duration-300 ${
+                      isActive
                         ? "text-white"
                         : "text-gray-600 group-hover:text-white"
                     }`}
                   />
                   <span
-                    className={`${
-                      activeCategory === category.name ||
-                      category.name === "Camera"
+                    className={`transition-all duration-300 ${
+                      isActive
                         ? "text-white"
                         : "text-gray-600 group-hover:text-white"
                     }`}
