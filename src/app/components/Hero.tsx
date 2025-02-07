@@ -11,7 +11,7 @@ const images = [
 
 const Hero = () => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [expandedCategory, setExpandedCategory] = useState<number | null>(null); 
+  const [expandedCategory, setExpandedCategory] = useState<number | null>(null);
 
   // Automatically change slides every 5 seconds
   useEffect(() => {
@@ -58,7 +58,7 @@ const Hero = () => {
                   className="flex justify-between items-center cursor-pointer"
                   onClick={() =>
                     setExpandedCategory(
-                      expandedCategory === index ? null : index // Toggle between null and index
+                      expandedCategory === index ? null : index
                     )
                   }
                 >
@@ -72,6 +72,7 @@ const Hero = () => {
 
                 {/* Subcategories */}
                 <div
+                  key={`${index}-subcategories`}
                   className={`ml-4 transition-height overflow-hidden ${
                     expandedCategory === index ? "max-h-[100px]" : "max-h-0"
                   }`}
@@ -103,15 +104,14 @@ const Hero = () => {
             {images.map((img, index) => (
               <div
                 key={index}
-                className="carousel-item w-1/3 h-full flex-shrink-0"
+                className="carousel-item w-1/3 h-full flex-shrink-0 relative"
               >
                 <Image
                   src={img.src}
                   alt={img.alt}
-                  fill
-                  priority
+                  layout="fill" // Use layout="fill" instead of fill
+                  objectFit="cover" // Ensure the image covers the container without distortion
                   className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 75vw"
                 />
               </div>
             ))}

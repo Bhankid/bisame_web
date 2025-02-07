@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronDownIcon } from "@heroicons/react/24/outline";
+// import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { useState, useEffect } from "react"; 
 
 const saleTexts = [
@@ -45,7 +45,7 @@ const MarketHeader = () => {
             </option>
           ))}
         </select>
-        <ChevronDownIcon className="ml-1 w-4 h-4" />
+        {/* <ChevronDownIcon className="ml-1 w-4 h-4" /> */}
       </div>
     </div>
   );
