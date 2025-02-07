@@ -1,11 +1,4 @@
-"use client";
 import Image from "next/image";
-import { useState } from "react"; // Import useState from React
-import {
-  StarIcon as StarFilledIcon,
-  HeartIcon,
-  ArrowPathIcon,
-} from "@heroicons/react/24/outline";
 
 // Define the Product type
 type Product = {
@@ -110,7 +103,7 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ product }: ProductCardProps) => (
-  <div className="border rounded-lg p-4 relative hover:shadow-lg transition-shadow duration-300">
+  <div className="border rounded-lg p-4 relative">
     {product.isNew && (
       <span className="absolute top-2 left-2 bg-green-500 text-white text-xs px-2 py-1 rounded">
         NEW
@@ -128,82 +121,53 @@ const ProductCard = ({ product }: ProductCardProps) => (
     <div className="flex items-center mb-2">
       <div className="flex items-center">
         {[...Array(5)].map((_, i) => (
-          <StarFilledIcon
+          <i
             key={i}
-            className={`w-4 h-4 ${
+            className={`fas fa-star ${
               i < Math.floor(product.rating)
                 ? "text-yellow-500"
                 : "text-gray-300"
             }`}
-          />
+          ></i>
         ))}
       </div>
       <span className="ml-2 text-gray-500">({product.reviews})</span>
     </div>
     {product.isInCart ? (
-      <button className="w-full bg-black text-white py-2 rounded hover:bg-gray-800 transition-colors">
+      <button className="w-full bg-black text-white py-2 rounded">
         Add To Cart
       </button>
     ) : (
       <div className="flex justify-between items-center">
-        <button className="text-gray-500 hover:text-red-500 transition-colors">
-          <HeartIcon className="w-5 h-5" />
+        <button className="text-gray-500">
+          <i className="far fa-heart"></i>
         </button>
-        <button className="text-gray-500 hover:text-blue-500 transition-colors">
-          <ArrowPathIcon className="w-5 h-5" />
+        <button className="text-gray-500">
+          <i className="fas fa-sync-alt"></i>
         </button>
       </div>
     )}
   </div>
 );
 
-const OurProducts = () => {
-  const [visibleProducts, setVisibleProducts] = useState(4); // Initially show 4 products
-
-  const handleViewAll = () => {
-    setVisibleProducts(products.length); // Show all products
-  };
-
-  const handleShowLess = () => {
-    setVisibleProducts(4); // Revert to showing 4 products
-  };
-
-  return (
-    <div className="max-w-7xl mx-auto p-4">
-      {/* Header */}
-      <div className="flex items-center mb-4">
-        <div className="w-2 h-8 bg-red-500 mr-2"></div>
-        <h2 className="text-xl font-bold text-red-500">Our Products</h2>
-      </div>
-      <h1 className="text-3xl font-bold mb-8">Explore Our Products</h1>
-
-      {/* Product Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {products.slice(0, visibleProducts).map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </div>
-
-      {/* View All / Show Less Button */}
-      <div className="flex justify-center mt-8">
-        {visibleProducts < products.length ? (
-          <button
-            onClick={handleViewAll}
-            className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 transition-colors"
-          >
-            View All Products
-          </button>
-        ) : (
-          <button
-            onClick={handleShowLess}
-            className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 transition-colors"
-          >
-            Show Less
-          </button>
-        )}
-      </div>
+const OurProducts = () => (
+  <div className="max-w-7xl mx-auto p-4">
+    <div className="flex items-center mb-4">
+      <div className="w-2 h-8 bg-red-500 mr-2"></div>
+      <h2 className="text-xl font-bold text-red-500">Our Products</h2>
     </div>
-  );
-};
+    <h1 className="text-3xl font-bold mb-8">Explore Our Products</h1>
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      {products.map((product) => (
+        <ProductCard key={product.id} product={product} />
+      ))}
+    </div>
+    <div className="flex justify-center mt-8">
+      <button className="bg-red-500 text-white py-2 px-4 rounded">
+        View All Products
+      </button>
+    </div>
+  </div>
+);
 
 export default OurProducts;
